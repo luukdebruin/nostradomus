@@ -1,7 +1,7 @@
 import React from 'react'
 
 function App() {
-	return <div className="bg-white">Hello World</div>
+	return <div></div>
 }
 
 export default App
