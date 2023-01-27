@@ -21,7 +21,15 @@ A Nostr web client built with React
 | [14](https://github.com/nostr-protocol/nips/blob/master/14.md) | ❌            | Subject tag in text events.                                  |
 | [15](https://github.com/nostr-protocol/nips/blob/master/15.md) | ❌             | End of Stored Events Notice                                  |
 | [16](https://github.com/nostr-protocol/nips/blob/master/16.md) | ❌            | Event Treatment                                              |
+| [19](https://github.com/nostr-protocol/nips/blob/master/19.md) | ❌            | bech32-encoded entities                                       |
+| [20](https://github.com/nostr-protocol/nips/blob/master/20.md) | ❌            | Command Results                                      |
+| [21](https://github.com/nostr-protocol/nips/blob/master/21.md) | ❌            | nostr: URL scheme                                       |
 | [22](https://github.com/nostr-protocol/nips/blob/master/22.md) | ❌             | Event created_at Limits                                      |
 | [25](https://github.com/nostr-protocol/nips/blob/master/25.md) | ❌            | Reactions                                                    |
+| [26](https://github.com/nostr-protocol/nips/blob/master/26.md) | ❌            | Delegated Event Signing                                                    |
 | [28](https://github.com/nostr-protocol/nips/blob/master/28.md) | ❌             | Public Chat                                                  |
+| [33](https://github.com/nostr-protocol/nips/blob/master/33.md) | ❌             | Parameterized Replaceable Events                                                  |
+| [36](https://github.com/nostr-protocol/nips/blob/master/36.md) | ❌             | Sensitive Content                                                |
+| [40](https://github.com/nostr-protocol/nips/blob/master/40.md) | ❌             | Expiration Timestamp                                                 |
+| [42](https://github.com/nostr-protocol/nips/blob/master/42.md) | ❌             | Authentication of clients to relays                                                |
 
