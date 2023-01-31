@@ -1,10 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-
-const Home = () => {
-	return <div>Hola Mundo</div>
-}
+import Home from './pages/Home'
 
 function App() {
 	return (

@@ -28,8 +28,8 @@ const navTree: NavTree[] = [
 ]
 
 const linkVariants = {
-	hidden: { opacity: 0, width: 0, marginLeft: '0px' },
-	visible: { opacity: 1, width: 'auto ', marginLeft: '8px' },
+	hidden: { opacity: 0, width: 0, marginLeft: '0px', display: 'none' },
+	visible: { opacity: 1, width: 'auto ', marginLeft: '8px', display: 'block' },
 }
 
 const linkTransition = {
@@ -45,6 +45,9 @@ const linkTransition = {
 		marginLeft: {
 			delay: 0.2,
 		},
+		display: {
+			delay: 0,
+		},
 	},
 	visible: {
 		duration: 0.3,
@@ -57,6 +60,9 @@ const linkTransition = {
 		},
 		marginLeft: {
 			delay: 0.2,
+		},
+		display: {
+			delay: 0.5,
 		},
 	},
 }
@@ -119,7 +125,7 @@ const MobileHeader = () => {
 	const { pathname } = useLocation()
 
 	return (
-		<div className="absolute w-full h-full flex flex-col justify-between top-0 left-0 px-2">
+		<div className="absolute w-full h-screen flex flex-col justify-between top-0 left-0 px-2">
 			<div className="w-full p-2 my-2 bg-slate-200 rounded-xl flex justify-between items-center">
 				<NavLink to="/" className="p-2">
 					<TbAsterisk size={32} color="#748BA7" />

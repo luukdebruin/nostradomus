@@ -14,9 +14,10 @@ const GlobalFeed = () => {
 	return (
 		<>
 			{events.map((event) => (
-				<p key={event.id}>
-					{event.pubkey} posted: {event.content}
-				</p>
+				<div className="p-4 bg-slate-200 rounded-xl mb-2 flex flex-col" key={event.id}>
+					<p className="text-slate-400 inline-block">{event.pubkey}</p>
+					<p className="text-slate-800 inline-block">{event.content}</p>
+				</div>
 			))}
 		</>
 	)
