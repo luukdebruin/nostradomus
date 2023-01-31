@@ -27,6 +27,29 @@ const navTree: NavTree[] = [
 	},
 ]
 
+const mobileNavTree: NavTree[] = [
+	{
+		name: 'Home',
+		link: '/',
+		icon: <TbSmartHome size={24} color="#748BA7" />,
+	},
+	{
+		name: 'Messages',
+		link: '/messages',
+		icon: <TbMessage2 size={24} color="#748BA7" />,
+	},
+	{
+		name: 'Notifications',
+		link: '/notifications',
+		icon: <TbBell size={24} color="#748BA7" />,
+	},
+	{
+		name: 'Settings',
+		link: '/settings',
+		icon: <TbSettings size={24} color="#748BA7" />,
+	},
+]
+
 const linkVariants = {
 	hidden: { opacity: 0, width: 0, marginLeft: '0px', display: 'none' },
 	visible: { opacity: 1, width: 'auto ', marginLeft: '8px', display: 'block' },
@@ -71,7 +94,7 @@ const DesktopHeader = () => {
 	const { pathname } = useLocation()
 
 	return (
-		<div className="w-full p-4 my-4 bg-slate-200 rounded-xl flex justify-between items-center">
+		<div className="w-full p-4 my-2 bg-slate-200 rounded-xl flex justify-between items-center">
 			<div className="flex items-center">
 				<NavLink to="/">
 					<TbAsterisk size={42} color="#748BA7" />
@@ -125,45 +148,49 @@ const MobileHeader = () => {
 	const { pathname } = useLocation()
 
 	return (
-		<div className="absolute w-full h-screen flex flex-col justify-between top-0 left-0 px-2">
-			<div className="w-full p-2 my-2 bg-slate-200 rounded-xl flex justify-between items-center">
-				<NavLink to="/" className="p-2">
-					<TbAsterisk size={32} color="#748BA7" />
-				</NavLink>
-				<div className="p-2">
-					<TbSearch size={32} color="#748BA7" />
+		<>
+			<div className="absolute w-full top-0 left-0 px-2">
+				<div className="w-full p-2 mt-2 bg-slate-200 rounded-xl flex justify-between items-center">
+					<NavLink to="/" className="p-2">
+						<TbAsterisk size={24} color="#748BA7" />
+					</NavLink>
+					<div className="p-2">
+						<TbSearch size={24} color="#748BA7" />
+					</div>
 				</div>
 			</div>
-			<div className="w-full p-2 my-2 bg-slate-200 rounded-xl flex justify-between items-center">
-				<AnimatePresence mode="wait">
-					{navTree.map((branch, i) => {
-						return (
-							<motion.div
-								key={i}
-								className="p-2 px-4 rounded-lg"
-								animate={
-									pathname === branch.link
-										? {
-												backgroundColor: 'rgba(255,255,255,1)',
-										  }
-										: {
-												backgroundColor: 'rgba(255,255,255,0)',
-										  }
-								}
-								transition={{
-									type: 'easeInOut',
-									duration: 0.4,
-								}}
-							>
-								<NavLink to={branch.link} className="flex items-center">
-									{branch.icon}
-								</NavLink>
-							</motion.div>
-						)
-					})}
-				</AnimatePresence>
+			<div className="absolute w-full bottom-0 left-0 px-2">
+				<div className="w-full p-2 mb-2 bg-slate-200 rounded-xl flex justify-between items-center">
+					<AnimatePresence mode="wait">
+						{mobileNavTree.map((branch, i) => {
+							return (
+								<motion.div
+									key={i}
+									className="p-2 px-4 rounded-lg"
+									animate={
+										pathname === branch.link
+											? {
+													backgroundColor: 'rgba(255,255,255,1)',
+											  }
+											: {
+													backgroundColor: 'rgba(255,255,255,0)',
+											  }
+									}
+									transition={{
+										type: 'easeInOut',
+										duration: 0.4,
+									}}
+								>
+									<NavLink to={branch.link} className="flex items-center">
+										{branch.icon}
+									</NavLink>
+								</motion.div>
+							)
+						})}
+					</AnimatePresence>
+				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

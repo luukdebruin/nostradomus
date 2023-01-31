@@ -1,12 +1,14 @@
 import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
-import reducers, { appMiddleware } from './index'
+import { persistStore } from 'redux-persist'
+import { appMiddleware, authMiddleware, persistedReducer } from './index'
 
 function configureStore() {
 	const store = createStore(
-		reducers,
+		persistedReducer,
 		applyMiddleware(
 			appMiddleware,
+			authMiddleware,
 			createLogger({
 				diff: false,
 			})
@@ -16,4 +18,5 @@ function configureStore() {
 }
 
 const store = configureStore()
+export const persistor = persistStore(store)
 export default store

@@ -2,27 +2,29 @@ import { Action, Middleware, MiddlewareAPI, Dispatch } from 'redux'
 import { RootState } from './index'
 
 export interface AppState {
-	counter: number
+	modal: JSX.Element
 }
 
 const initialState: AppState = {
-	counter: 0,
+	modal: undefined,
 }
 
 export enum AppTypeKeys {
-	INCREMENT = 'INCREMENT',
+	SET_MODAL = 'SET_MODAL',
 }
 
-export interface IncrementAction extends Action {
-	type: AppTypeKeys.INCREMENT
+export interface SetModalAction extends Action {
+	type: AppTypeKeys.SET_MODAL
+	modal: JSX.Element
 }
 
-export type AppActionTypes = IncrementAction
+export type AppActionTypes = SetModalAction
 
 export const appActionCreators = {
-	increment(): IncrementAction {
+	setModal(modal: JSX.Element): SetModalAction {
 		return {
-			type: AppTypeKeys.INCREMENT,
+			type: AppTypeKeys.SET_MODAL,
+			modal,
 		}
 	},
 }
@@ -31,10 +33,10 @@ export type AppActionCreators = typeof appActionCreators
 
 export default function AppReducer(state = initialState, action: AppActionTypes) {
 	switch (action.type) {
-		case AppTypeKeys.INCREMENT:
+		case AppTypeKeys.SET_MODAL:
 			return {
 				...state,
-				counter: state.counter + 1,
+				modal: action.modal,
 			}
 		default:
 			return state
