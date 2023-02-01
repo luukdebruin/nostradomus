@@ -3,11 +3,6 @@ import { useAppDispatch } from 'src/redux/hooks'
 import { authActionCreators } from 'src/redux/auth'
 import { generatePrivateKey, getPublicKey } from 'nostr-tools'
 
-interface SignInProps {
-	pk: string
-	sk?: string
-}
-
 export const generateKeys = () => {
 	const sk = generatePrivateKey()
 	const pk = getPublicKey(sk)
@@ -15,7 +10,7 @@ export const generateKeys = () => {
 	return [pk, sk]
 }
 
-export const SignIn = ({ pk, sk }: SignInProps) => {
+export const SignIn = (pk: string, sk: string) => {
 	const dispatch = useAppDispatch()
 	const { login } = bindActionCreators(
 		{

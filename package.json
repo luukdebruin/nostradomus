@@ -9,6 +9,7 @@
     "eject": "yarn react-scripts eject"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "framer-motion": "^8.5.5",
     "nostr-react": "^0.6.1",
     "nostr-tools": "^1.2.0",

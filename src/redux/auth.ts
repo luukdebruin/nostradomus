@@ -19,7 +19,7 @@ export enum AuthTypeKeys {
 export interface LoginAction extends Action {
 	type: AuthTypeKeys.LOGIN
 	pk: string
-	sk?: string
+	sk: string
 }
 
 export interface LogoutAction extends Action {
@@ -29,7 +29,7 @@ export interface LogoutAction extends Action {
 export type AuthActionTypes = LoginAction | LogoutAction
 
 export const authActionCreators = {
-	login(sk: string, pk?: string): LoginAction {
+	login(pk: string, sk: string): LoginAction {
 		return {
 			type: AuthTypeKeys.LOGIN,
 			pk,

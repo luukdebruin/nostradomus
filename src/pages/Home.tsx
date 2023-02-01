@@ -11,9 +11,7 @@ const Home = () => {
 			<div className={`sticky self-start top-0 w-1/2 ${isMobile ? 'hidden' : 'block'}`}>
 				<Profile />
 			</div>
-			<div className="flex-1">
-				<GlobalFeed />
-			</div>
+			<div className="flex-1">{/* <GlobalFeed /> */}</div>
 			<div className={`sticky self-start top-0  w-1/2 ${isTablet ? 'hidden' : 'block'}`}>
 				<div className="p-4 rounded-lg bg-slate-300">Other Stuff</div>
 			</div>
