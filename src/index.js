@@ -6,28 +6,7 @@ import store, { persistor } from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 import './global.css'
 import App from './App'
-
-const relayUrls = [
-	'wss://nostr-pub.wellorder.net',
-	'wss://relay.nostr.ch',
-	'wss://nostr-relay.alekberg.net',
-	'wss://nostr.bitcoiner.social',
-	'wss://nostr.openchain.fr',
-	'wss://nostr.zebedee.cloud',
-	'wss://nostr.chaker.net',
-	'wss://relay.cryptocculture.com',
-	'wss://nostr.coollamer.com',
-	'wss://relay.nostrich.de',
-	'wss://no-str.org',
-	'wss://relay.nostr.scot',
-	'wss://jiggytom.ddns.net',
-	'/wss://nostr.nodeofsven.com',
-	'wss://nostr.drss.io',
-	'wss://relay.damus.io',
-	'wss://nostr.p2sh.co',
-	'wss://nostr.yael.at',
-	'wss://relay.taxi',
-]
+import { relayUrls } from 'src/nostr/relay'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

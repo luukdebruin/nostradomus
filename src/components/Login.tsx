@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import { SignIn } from 'src/auth/auth'
 import Button from './Button'
 import { bindActionCreators } from 'redux'
 import { useAppDispatch } from 'src/redux/hooks'
