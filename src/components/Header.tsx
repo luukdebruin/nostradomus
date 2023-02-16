@@ -105,7 +105,7 @@ const DesktopHeader = () => {
 				<AnimatePresence>
 					{navTree.map((branch, i) => {
 						return (
-							<NavLink key={i} to={branch.link} onClick={() => console.log(branch, i)}>
+							<NavLink key={i} to={branch.link}>
 								<motion.div
 									className="p-2 px-4 rounded-lg flex items-center"
 									animate={

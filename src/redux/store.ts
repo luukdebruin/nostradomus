@@ -10,7 +10,7 @@ function configureStore() {
 			appMiddleware,
 			authMiddleware,
 			createLogger({
-				diff: true,
+				diff: false,
 			})
 		)
 	)

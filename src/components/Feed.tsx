@@ -15,8 +15,6 @@ const GlobalFeed = () => {
 		},
 	})
 
-	console.log(events)
-
 	const orderedEvents = events.sort((a, b) => b.created_at - a.created_at)
 
 	return (

@@ -22,7 +22,8 @@
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "reduxjs-toolkit-persist": "^7.2.1"
+    "reduxjs-toolkit-persist": "^7.2.1",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

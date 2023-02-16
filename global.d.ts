@@ -3,6 +3,13 @@ interface AppError extends Error {
     duration?: number
 }
 
+interface Relay {
+    id: string
+    address: string
+}
+
+type Relays = Relay[]
+
 type NavTree = {
     name: string
     link: string

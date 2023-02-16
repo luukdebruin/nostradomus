@@ -1,12 +1,14 @@
 import Feed from 'src/components/Feed'
 import React from 'react'
 import Profile from 'src/components/Profile'
+import RelayList from 'src/components/RelayList'
 
 const Home = () => {
 	return (
 		<div className="flex overflow-y-auto overflow-x-hidden h-full">
 			<div className="sticky self-start top-0 w-1/2 lg:w-1/3 2xl:w-1/4 hidden md:block mr-2">
 				<Profile />
+				<RelayList />
 			</div>
 			<div className="w-full md:w-1/2 lg:w-2/3 2xl:w-1/2">
 				<Feed />
