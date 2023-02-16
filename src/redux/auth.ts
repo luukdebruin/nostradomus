@@ -55,7 +55,8 @@ export default function AuthReducer(state = initialState, action: AuthActionType
 			}
 		case AuthTypeKeys.LOGOUT:
 			return {
-				user: undefined,
+				pk: undefined,
+				sk: undefined,
 			}
 		default:
 			return state
@@ -65,10 +66,10 @@ export default function AuthReducer(state = initialState, action: AuthActionType
 export function AuthMiddleware(): Middleware {
 	return (_: MiddlewareAPI<Dispatch, RootState>) => (next) => async (action: any) => {
 		next(action)
-		switch (action.type) {
-			case AuthTypeKeys.LOGOUT: {
-				return AuthReducer(undefined, action)
-			}
-		}
+		// switch (action.type) {
+		// 	case AuthTypeKeys.LOGOUT: {
+		// 		return AuthReducer(undefined, action)
+		// 	}
+		// }
 	}
 }

@@ -6,10 +6,11 @@ import { allActionCreators } from 'src/redux'
 
 export default function Login() {
 	const dispatch = useAppDispatch()
-	const { login, setModal } = bindActionCreators(
+	const { login, setModal, setError } = bindActionCreators(
 		{
 			login: allActionCreators.login,
 			setModal: allActionCreators.setModal,
+			setError: allActionCreators.setError,
 		},
 		dispatch
 	)
@@ -23,6 +24,7 @@ export default function Login() {
 		const sk = skRef.current.value
 		login(pk, sk)
 		setModal(undefined)
+		setError({ name: pkRef.current.value, message: skRef.current.value, type: 'default' })
 	}
 
 	return (
