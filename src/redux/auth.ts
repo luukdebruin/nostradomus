@@ -1,39 +1,51 @@
 import { Action, Middleware, MiddlewareAPI, Dispatch } from 'redux'
 import { RootState } from './index'
+import store from './store'
+import { getNpub } from 'src/nostr/user'
 
 export interface AuthState {
-	pk: string
-	sk: string
+	npub: string
+	nsec: string
 }
 
 const initialState: AuthState = {
-	pk: undefined,
-	sk: undefined,
+	npub: undefined,
+	nsec: undefined,
 }
 
 export enum AuthTypeKeys {
-	LOGIN = 'LOGIN',
+	SET_PUBLIC_KEY = 'SET_PUBLIC_KEY',
+	SET_PRIVATE_KEY = 'SET_PRIVATE_KEY',
 	LOGOUT = 'LOGOUT',
 }
 
-export interface LoginAction extends Action {
-	type: AuthTypeKeys.LOGIN
-	pk: string
-	sk: string
+export interface SetPublicKeyAction extends Action {
+	type: AuthTypeKeys.SET_PUBLIC_KEY
+	npub: string
+}
+
+export interface SetPrivateKeyAction extends Action {
+	type: AuthTypeKeys.SET_PRIVATE_KEY
+	nsec: string
 }
 
 export interface LogoutAction extends Action {
 	type: AuthTypeKeys.LOGOUT
 }
 
-export type AuthActionTypes = LoginAction | LogoutAction
+export type AuthActionTypes = SetPublicKeyAction | SetPrivateKeyAction | LogoutAction
 
 export const authActionCreators = {
-	login(pk: string, sk: string): LoginAction {
+	setPublicKey(npub: string): SetPublicKeyAction {
 		return {
-			type: AuthTypeKeys.LOGIN,
-			pk,
-			sk,
+			type: AuthTypeKeys.SET_PUBLIC_KEY,
+			npub,
+		}
+	},
+	setPrivateKey(nsec: string): SetPrivateKeyAction {
+		return {
+			type: AuthTypeKeys.SET_PRIVATE_KEY,
+			nsec,
 		}
 	},
 	logout(): LogoutAction {
@@ -47,16 +59,20 @@ export type AuthActionCreators = typeof authActionCreators
 
 export default function AuthReducer(state = initialState, action: AuthActionTypes) {
 	switch (action.type) {
-		case AuthTypeKeys.LOGIN:
+		case AuthTypeKeys.SET_PUBLIC_KEY:
 			return {
 				...state,
-				pk: action.pk,
-				sk: action.sk,
+				npub: action.npub,
+			}
+		case AuthTypeKeys.SET_PRIVATE_KEY:
+			return {
+				...state,
+				nsec: action.nsec,
 			}
 		case AuthTypeKeys.LOGOUT:
 			return {
-				pk: undefined,
-				sk: undefined,
+				npub: undefined,
+				nsec: undefined,
 			}
 		default:
 			return state
@@ -66,10 +82,16 @@ export default function AuthReducer(state = initialState, action: AuthActionType
 export function AuthMiddleware(): Middleware {
 	return (_: MiddlewareAPI<Dispatch, RootState>) => (next) => async (action: any) => {
 		next(action)
-		// switch (action.type) {
-		// 	case AuthTypeKeys.LOGOUT: {
-		// 		return AuthReducer(undefined, action)
-		// 	}
-		// }
+		const state = store.getState()
+		switch (action.type) {
+			case AuthTypeKeys.SET_PRIVATE_KEY: {
+				if (!state.auth.npub) {
+					const publicKey = getNpub(action.nsec)
+				}
+				return
+			}
+			default:
+				break
+		}
 	}
 }

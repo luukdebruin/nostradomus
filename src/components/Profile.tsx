@@ -14,10 +14,10 @@ const Profile = () => {
 		},
 		dispatch
 	)
-	const pk = useAppSelector((state) => state.auth.pk)
-	const sk = useAppSelector((state) => state.auth.sk)
+	const npub = useAppSelector((state) => state.auth.npub)
+	const nsec = useAppSelector((state) => state.auth.nsec)
 
-	if (!sk) {
+	if (!nsec) {
 		return (
 			<div className="p-4 rounded-lg bg-slate-200">
 				<h2>You are currently not logged in</h2>
@@ -35,7 +35,7 @@ const Profile = () => {
 
 	return (
 		<div className="p-4 rounded-lg bg-slate-200">
-			<h2>{pk}</h2>
+			<h2>{npub}</h2>
 			<div className="flex mt-4">
 				<Button onClick={logout}>Log out</Button>
 			</div>

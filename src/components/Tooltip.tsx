@@ -4,23 +4,23 @@ import { allActionCreators } from 'src/redux'
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
 import { motion, AnimatePresence, AnimateSharedLayout } from 'framer-motion'
 
-const Error = () => {
+const Tooltip = () => {
 	const dispatch = useAppDispatch()
-	const { clearError } = bindActionCreators(
+	const { clearTooltip } = bindActionCreators(
 		{
-			clearError: allActionCreators.clearError,
+			clearTooltip: allActionCreators.clearTooltip,
 		},
 		dispatch
 	)
-	const errors = useAppSelector((state) => state.app.errors)
+	const tooltips = useAppSelector((state) => state.app.tooltips)
 
-	const errorTypes = {
+	const tooltipTypes = {
 		default: 'bg-blue-500',
 		warning: 'bg-amber-500',
 		error: 'bg-red-500',
 	}
 
-	if (errors.length === 0) {
+	if (tooltips.length === 0) {
 		return null
 	}
 
@@ -28,7 +28,7 @@ const Error = () => {
 		<AnimateSharedLayout>
 			<motion.div className="absolute bottom-20 md:bottom-4 flex flex-col items-center w-full z-20 bg" layout>
 				<AnimatePresence>
-					{errors.map((error: AppError, i: number) => (
+					{tooltips.map((tooltip: Tooltip, i: number) => (
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
@@ -36,12 +36,12 @@ const Error = () => {
 							layout
 							key={i}
 							className={`flex flex-col items-center max-w-xs mt-2 py-2 px-4 rounded-lg cursor-pointer ${
-								errorTypes[error.type]
+								tooltipTypes[tooltip.type]
 							}`}
-							onClick={() => clearError(error)}
+							onClick={() => clearTooltip(tooltip)}
 						>
-							<h3 className="text-slate-50 text-base">{error.name}</h3>
-							<p className="text-slate-50 text-sm">{error.message}</p>
+							<h3 className="text-slate-50 text-base">{tooltip.name}</h3>
+							<p className="text-slate-50 text-sm">{tooltip.message}</p>
 						</motion.div>
 					))}
 				</AnimatePresence>
@@ -50,4 +50,4 @@ const Error = () => {
 	)
 }
 
-export default Error
+export default Tooltip

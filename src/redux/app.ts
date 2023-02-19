@@ -5,20 +5,20 @@ import { relayUrls } from 'src/nostr/relay'
 
 export interface AppState {
 	modal: JSX.Element
-	errors: AppError[]
+	tooltips: Tooltip[]
 	relays: Relays
 }
 
 const initialState: AppState = {
 	modal: undefined,
-	errors: [],
+	tooltips: [],
 	relays: relayUrls,
 }
 
 export enum AppTypeKeys {
 	SET_MODAL = 'SET_MODAL',
-	SET_ERROR = 'SET_ERROR',
-	CLEAR_ERROR = 'CLEAR_ERROR',
+	SET_TOOLTIP = 'SET_TOOLTIP',
+	CLEAR_TOOLTIP = 'CLEAR_TOOLTIP',
 	ADD_RELAY = 'ADD_RELAY',
 	REMOVE_RELAY = 'REMOVE_RELAY',
 	UPDATE_RELAY = 'UPDATE_RELAY',
@@ -29,14 +29,14 @@ export interface SetModalAction extends Action {
 	modal: JSX.Element
 }
 
-export interface SetErrorAction extends Action {
-	type: AppTypeKeys.SET_ERROR
-	error: AppError
+export interface SetTooltipAction extends Action {
+	type: AppTypeKeys.SET_TOOLTIP
+	tooltip: Tooltip
 }
 
-export interface ClearErrorAction extends Action {
-	type: AppTypeKeys.CLEAR_ERROR
-	error: AppError
+export interface ClearTooltipAction extends Action {
+	type: AppTypeKeys.CLEAR_TOOLTIP
+	tooltip: Tooltip
 }
 
 export interface AddRelayAction extends Action {
@@ -56,8 +56,8 @@ export interface UpdateRelayAction extends Action {
 
 export type AppActionTypes =
 	| SetModalAction
-	| SetErrorAction
-	| ClearErrorAction
+	| SetTooltipAction
+	| ClearTooltipAction
 	| AddRelayAction
 	| RemoveRelayAction
 	| UpdateRelayAction
@@ -69,16 +69,16 @@ export const appActionCreators = {
 			modal,
 		}
 	},
-	setError(error: AppError): SetErrorAction {
+	setTooltip(tooltip: Tooltip): SetTooltipAction {
 		return {
-			type: AppTypeKeys.SET_ERROR,
-			error,
+			type: AppTypeKeys.SET_TOOLTIP,
+			tooltip,
 		}
 	},
-	clearError(error: AppError): ClearErrorAction {
+	clearTooltip(tooltip: Tooltip): ClearTooltipAction {
 		return {
-			type: AppTypeKeys.CLEAR_ERROR,
-			error,
+			type: AppTypeKeys.CLEAR_TOOLTIP,
+			tooltip,
 		}
 	},
 	addRelay(relay: Relay): AddRelayAction {
@@ -110,15 +110,15 @@ export default function AppReducer(state = initialState, action: AppActionTypes)
 				...state,
 				modal: action.modal,
 			}
-		case AppTypeKeys.SET_ERROR:
+		case AppTypeKeys.SET_TOOLTIP:
 			return {
 				...state,
-				errors: [...state.errors, action.error],
+				tooltip: [...state.tooltips, action.tooltip],
 			}
-		case AppTypeKeys.CLEAR_ERROR:
+		case AppTypeKeys.CLEAR_TOOLTIP:
 			return {
 				...state,
-				errors: state.errors.filter((error: Error) => error !== action.error),
+				tooltips: state.tooltips.filter((tooltip: Tooltip) => tooltip !== action.tooltip),
 			}
 		case AppTypeKeys.ADD_RELAY:
 			return {
@@ -131,9 +131,10 @@ export default function AppReducer(state = initialState, action: AppActionTypes)
 				relays: state.relays.filter((relay: Relay) => relay.id !== action.relayId),
 			}
 		case AppTypeKeys.UPDATE_RELAY: {
-			const newRelays = state.relays
+			const newRelays = [...state.relays]
 			const targetRelay: Relay = newRelays.filter((relay: Relay) => relay.id === action.relay.id)[0]
 			targetRelay.address = action.relay.address
+			targetRelay.active = action.relay.active
 			return {
 				...state,
 				relays: newRelays,
@@ -150,12 +151,14 @@ export function AppMiddleware(): Middleware {
 		// const state = store.getState()
 		next(action)
 		switch (action.type) {
-			case AppTypeKeys.SET_ERROR: {
+			case AppTypeKeys.SET_TOOLTIP: {
 				setTimeout(() => {
-					store.dispatch(allActionCreators.clearError(action.error))
-				}, action.duration || 30000)
+					store.dispatch(allActionCreators.clearTooltip(action.tooltip))
+				}, action.duration || 3000)
 				return
 			}
+			default:
+				break
 		}
 	}
 }

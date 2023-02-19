@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home'
@@ -8,12 +8,18 @@ import { useAppSelector } from './redux/hooks'
 
 function App() {
 	const relays = useAppSelector((state) => state.app.relays)
-	const relayAddresses = relays.map((relay) => {
-		return relay.address
-	})
+
+	const relayUrls = useMemo(() => {
+		const urls = relays
+			.filter((relay: Relay) => relay.active)
+			.map((relay: Relay) => {
+				return relay.address
+			})
+		return urls
+	}, [relays])
 
 	return (
-		<NostrProvider relayUrls={relayAddresses} debug={true}>
+		<NostrProvider relayUrls={relayUrls} debug={false}>
 			<Router>
 				<Modal />
 				<Layout>

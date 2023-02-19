@@ -1,11 +1,14 @@
-interface AppError extends Error {
-    type: ErrorType
+interface Tooltip {
+    type: TooltipType
+    name: string
+    message?: string
     duration?: number
 }
 
 interface Relay {
     id: string
     address: string
+    active: boolean
 }
 
 type Relays = Relay[]
@@ -16,6 +19,6 @@ type NavTree = {
     icon: React.ReactElement
 }
 
-type ErrorType = 'default' | 'warning' | 'error'
+type TooltipType = 'default' | 'warning' | 'error'
 type buttonVariant = "primary" | "secondary" | "link"
 type buttonSize =  "small" | "medium" | "large"

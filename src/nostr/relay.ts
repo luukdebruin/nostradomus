@@ -1,8 +1,8 @@
+// import { relayInit } from 'nostr-tools'
+
 export const relayUrls: Relays = [
-	{ id: '4D3BAE98-0FAD-4659-A4FF-EFD8B75DC559', address: 'wss://nostr-pub.wellorder.net' },
-	{ id: 'FAE831DC-64CE-4D83-8576-B0495BF0D1EB', address: 'wss://relay.nostr.ch' },
-	{ id: '90CDD2D2-1000-4C85-AC25-10EAE70F30B4', address: 'wss://relay.damus.io' },
-	{ id: '709D8449-4094-46F7-87DF-3A0A0F782E26', address: 'wss://nostr.openchain.fr' },
+	{ id: '4D3BAE98-0FAD-4659-A4FF-EFD8B75DC559', address: 'wss://nostr.zebedee.cloud', active: true },
+	{ id: '709D8449-4094-46F7-87DF-3A0A0F782E26', address: 'wss://nostr.openchain.fr', active: true },
 	// 'wss://relay.nostr.ch',
 	// 'wss://nostr-relay.alekberg.net',
 	// 'wss://nostr.bitcoiner.social',
@@ -22,3 +22,15 @@ export const relayUrls: Relays = [
 	// 'wss://nostr.yael.at',
 	// 'wss://relay.taxi',
 ]
+
+// export async function connect(relayUrls: string[]) {
+// 	relayUrls.forEach((relayUrl) => {
+// 		const relay = relayInit(relayUrl)
+// 		relay.connect()
+// 		return relay
+// 		// relayInit(relay)
+// 		// 	.connect()
+// 		// 	.then((response) => console.log(response))
+// 		// 	.catch((err) => console.log('error', err))
+// 	})
+// }

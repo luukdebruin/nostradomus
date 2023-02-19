@@ -35,6 +35,18 @@ const RelayList = () => {
 						>
 							<TbTrash />
 						</div>
+						<div
+							className={`p-3 bg-slate-50 rounded-md cursor-pointer ml-2 ${
+								relay.active ? 'hover:bg-lime-300' : 'hover:bg-red-300'
+							} duration-200 ease-in-out`}
+							onClick={() => updateRelay({ ...relay, active: !relay.active })}
+						>
+							<span
+								className={`w-2 h-2 block rounded-full ${
+									relay.active ? 'bg-lime-500' : 'bg-red-600'
+								} duration-200 ease-in-out`}
+							></span>
+						</div>
 					</div>
 				)
 			})}
@@ -49,7 +61,7 @@ const RelayList = () => {
 				<div
 					className="p-2 bg-slate-50 rounded-md cursor-pointer ml-2 hover:bg-indigo-300 duration-200 ease-in-out"
 					onClick={() => {
-						addRelay({ id: v4(), address: newRelay }), setNewRelay('')
+						addRelay({ id: v4(), address: newRelay, active: true }), setNewRelay('')
 					}}
 				>
 					<TbPlus />
