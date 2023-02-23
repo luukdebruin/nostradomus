@@ -1,7 +1,7 @@
-import Feed from 'src/components/Feed'
 import React from 'react'
 import Profile from 'src/components/Profile'
 import RelayList from 'src/components/RelayList'
+import Feed from 'src/components/GlobalFeed'
 
 const Home = () => {
 	return (

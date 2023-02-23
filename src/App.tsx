@@ -19,7 +19,7 @@ function App() {
 	}, [relays])
 
 	return (
-		<NostrProvider relayUrls={relayUrls} debug={false}>
+		<NostrProvider relayUrls={relayUrls} debug={true}>
 			<Router>
 				<Modal />
 				<Layout>

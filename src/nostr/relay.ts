@@ -1,4 +1,4 @@
-// import { relayInit } from 'nostr-tools'
+import { Relay, relayInit } from 'nostr-tools'
 
 export const relayUrls: Relays = [
 	{ id: '4D3BAE98-0FAD-4659-A4FF-EFD8B75DC559', address: 'wss://nostr.zebedee.cloud', active: true },
@@ -23,14 +23,25 @@ export const relayUrls: Relays = [
 	// 'wss://relay.taxi',
 ]
 
-// export async function connect(relayUrls: string[]) {
-// 	relayUrls.forEach((relayUrl) => {
-// 		const relay = relayInit(relayUrl)
-// 		relay.connect()
-// 		return relay
-// 		// relayInit(relay)
-// 		// 	.connect()
-// 		// 	.then((response) => console.log(response))
-// 		// 	.catch((err) => console.log('error', err))
-// 	})
-// }
+export function connectRelay(url: string): Relay {
+	const relay = relayInit(url)
+
+	relay.on('connect', () => {
+		console.log(`Connected ${relay.url}`)
+	})
+
+	relay.on('disconnect', () => {
+		console.log(`Disconnected ${relay.url}`)
+	})
+
+	relay.on('error', () => {
+		console.error(`Error ${relay.url}`)
+	})
+
+	relay.on('notice', () => {
+		console.warn(`Notice ${relay.url}`)
+	})
+
+	relay.connect()
+	return relay
+}

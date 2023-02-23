@@ -82,12 +82,12 @@ export default function AuthReducer(state = initialState, action: AuthActionType
 export function AuthMiddleware(): Middleware {
 	return (_: MiddlewareAPI<Dispatch, RootState>) => (next) => async (action: any) => {
 		next(action)
-		const state = store.getState()
+		// const state = store.getState()
 		switch (action.type) {
 			case AuthTypeKeys.SET_PRIVATE_KEY: {
-				if (!state.auth.npub) {
-					const publicKey = getNpub(action.nsec)
-				}
+				// if (!state.auth.npub) {
+				// 	const publicKey = getNpub(action.nsec)
+				// }
 				return
 			}
 			default:

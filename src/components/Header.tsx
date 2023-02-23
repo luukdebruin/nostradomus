@@ -130,7 +130,7 @@ const DesktopHeader = () => {
 										animate={pathname === branch.link ? 'visible' : 'hidden'}
 										exit="hidden"
 										transition={pathname === branch.link ? linkTransition.hidden : linkTransition.visible}
-										className="font-bold text-slate-800"
+										className="font-medium text-slate-500"
 									>
 										{branch.name}
 									</motion.h2>

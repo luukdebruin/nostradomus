@@ -3,8 +3,25 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'Basier_Regular';
-	src: url('/public/fonts/BasierSquare-Regular.otf');
+	font-family: 'Borna_Regular';
+	src: url('/public/fonts/borna-regular-webfont.ttf');
+	src: url('/public/fonts/borna-regular-webfont.eot') format('embedded-opentype'), url('/public/fonts/borna-regular-webfont.woff2') format('woff2'), url('/public/fonts/borna-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Borna_Medium';
+	src: url('/public/fonts/borna-medium-webfont.ttf');
+	src: url('/public/fonts/borna-medium-webfont.eot') format('embedded-opentype'), url('/public/fonts/borna-medium-webfont.woff2') format('woff2'), url('/public/fonts/borna-medium-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Borna_Bold';
+	src: url('/public/fonts/borna-bold-webfont.ttf');
+	src: url('/public/fonts/borna-bold-webfont.eot') format('embedded-opentype'), url('/public/fonts/borna-bold-webfont.woff2') format('woff2'), url('/public/fonts/borna-bold-webfont.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -14,7 +31,7 @@ body, #root {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	font-family: Basier_Regular;
+	font-family: Borna_Regular;
 	outline: none;
 	width: 100%;
 	height: 100%;
