@@ -23,6 +23,7 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "reduxjs-toolkit-persist": "^7.2.1",
+    "svelte": "^3.55.1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -48,7 +49,7 @@
   },
   "browserslist": [
     ">0.2%",
-   "not dead",
-   "not op_mini all"
+    "not dead",
+    "not op_mini all"
   ]
 }

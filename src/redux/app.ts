@@ -1,7 +1,9 @@
 import { Action, Middleware, MiddlewareAPI, Dispatch } from 'redux'
 import { RootState, allActionCreators } from './index'
 import store from './store'
-import { relayUrls } from 'src/nostr/relay'
+// import { fallbackRelays } from 'src/nostr/relay'
+import { Relays, Tooltip } from 'global'
+import { type Relay } from 'nostr-tools'
 
 export interface AppState {
 	modal: JSX.Element
@@ -12,7 +14,7 @@ export interface AppState {
 const initialState: AppState = {
 	modal: undefined,
 	tooltips: [],
-	relays: relayUrls,
+	relays: {},
 }
 
 export enum AppTypeKeys {
@@ -22,6 +24,7 @@ export enum AppTypeKeys {
 	ADD_RELAY = 'ADD_RELAY',
 	REMOVE_RELAY = 'REMOVE_RELAY',
 	UPDATE_RELAY = 'UPDATE_RELAY',
+	SET_RELAYS = 'SET_RELAYS',
 }
 
 export interface SetModalAction extends Action {
@@ -54,6 +57,11 @@ export interface UpdateRelayAction extends Action {
 	relay: Relay
 }
 
+export interface SetRelaysAction extends Action {
+	type: AppTypeKeys.SET_RELAYS
+	relays: Relays
+}
+
 export type AppActionTypes =
 	| SetModalAction
 	| SetTooltipAction
@@ -61,6 +69,7 @@ export type AppActionTypes =
 	| AddRelayAction
 	| RemoveRelayAction
 	| UpdateRelayAction
+	| SetRelaysAction
 
 export const appActionCreators = {
 	setModal(modal: JSX.Element): SetModalAction {
@@ -99,6 +108,12 @@ export const appActionCreators = {
 			relay,
 		}
 	},
+	setRelays(relays: Relays): SetRelaysAction {
+		return {
+			type: AppTypeKeys.SET_RELAYS,
+			relays,
+		}
+	},
 }
 
 export type AppActionCreators = typeof appActionCreators
@@ -113,33 +128,38 @@ export default function AppReducer(state = initialState, action: AppActionTypes)
 		case AppTypeKeys.SET_TOOLTIP:
 			return {
 				...state,
-				tooltip: [...state.tooltips, action.tooltip],
+				tooltips: [...state.tooltips, action.tooltip],
 			}
 		case AppTypeKeys.CLEAR_TOOLTIP:
 			return {
 				...state,
 				tooltips: state.tooltips.filter((tooltip: Tooltip) => tooltip !== action.tooltip),
 			}
-		case AppTypeKeys.ADD_RELAY:
+		case AppTypeKeys.SET_RELAYS:
 			return {
 				...state,
-				relays: [...state.relays, action.relay],
+				relays: action.relays,
 			}
-		case AppTypeKeys.REMOVE_RELAY:
-			return {
-				...state,
-				relays: state.relays.filter((relay: Relay) => relay.id !== action.relayId),
-			}
-		case AppTypeKeys.UPDATE_RELAY: {
-			const newRelays = [...state.relays]
-			const targetRelay: Relay = newRelays.filter((relay: Relay) => relay.id === action.relay.id)[0]
-			targetRelay.address = action.relay.address
-			targetRelay.active = action.relay.active
-			return {
-				...state,
-				relays: newRelays,
-			}
-		}
+		// case AppTypeKeys.ADD_RELAY:
+		// 	return {
+		// 		...state,
+		// 		relays: [...state.relays, action.relay],
+		// 	}
+		// case AppTypeKeys.REMOVE_RELAY:
+		// 	return {
+		// 		...state,
+		// 		relays: state.relays.filter((relay: Relay) => relay.id !== action.relayId),
+		// 	}
+		// case AppTypeKeys.UPDATE_RELAY: {
+		// 	const newRelays = {...state.relays}
+		// 	const targetRelay: Relay = newRelays.filter((relay: Relay) => relay.id === action.relay.id)[0]
+		// 	targetRelay.address = action.relay.address
+		// 	targetRelay.active = action.relay.active
+		// 	return {
+		// 		...state,
+		// 		relays: newRelays,
+		// 	}
+		// }
 		default:
 			return state
 	}
